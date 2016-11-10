@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Olympia</string>
+
+    <string name="dummy_button">Take a break</string>
+    <string name="dummy_content">Olympia</string>
+</resources>
