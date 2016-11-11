@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:fitsSystemWindows="true"
+        android:gravity="center_vertical|center_horizontal"
+        >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/moodQuestion"
+                android:layout_gravity="center"
+                android:layout_weight="90"
+                android:fontFamily="casual"
+                android:text="@string/your_feelings_now"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="22sp"
+                android:textStyle="bold">
+            </TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="90"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+
+
+
+            <Button
+                android:id="@+id/joyBtn"
+                android:text="@string/joy"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/joyFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/joy"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="90"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+            <Button
+                android:id="@+id/euphoriaBtn"
+                android:text="@string/euphoria"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/euphoriaFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/euphoria"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="90"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+
+            <Button
+                android:id="@+id/impatientBtn"
+                android:text="@string/impatient"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/impatientFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/impatient"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="90"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+
+            <Button
+                android:id="@+id/calmBtn"
+                android:text="@string/calm"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/calmFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/calm"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="90"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+            <Button
+                android:id="@+id/excitedBtn"
+                android:text="@string/excited"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/excitedFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/excited"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            >
+            <Button
+                android:id="@+id/angryBtn"
+                android:text="@string/angry"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/angryFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/angry"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="90"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+            <Button
+                android:id="@+id/sadBtn"
+                android:text="@string/sad"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/sadFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/sad"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="90"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+            <Button
+                android:id="@+id/melancholicBtn"
+                android:text="@string/melancholy"
+                android:layout_weight="90"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textColor="@color/melancholyFont"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/melancholy"/>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
