@@ -19,19 +19,11 @@
         android:textSize="66sp"
         android:textStyle="bold"
         android:gravity="center_horizontal"
-        android:paddingTop="65dp"
-        android:fontFamily="sans-serif"
-        android:paddingRight="-100sp" />
+        android:paddingTop="120dp"
+        android:fontFamily="sans-serif"/>
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-
-    <ImageView
-        android:layout_width="123dp"
-        android:layout_height="146dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/imageView"
-        android:paddingTop="65sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -53,9 +45,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:paddingTop="90sp">
 
             <Button
                 android:text="Take it easy"
@@ -69,7 +62,7 @@
                 android:fontFamily="casual"
                 android:textAlignment="center"
                 android:backgroundTint="@color/black_overlay"
-                android:onClick="openImage"/>
+                android:onClick="openImage" />
 
             <Button
                 android:text="Load previous mandala"
@@ -106,6 +99,15 @@
                 android:textSize="22sp"
                 android:fontFamily="casual" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/imageView"
+            android:gravity="center_horizontal"
+            android:paddingTop="25sp"
+            android:paddingBottom="25sp"/>
 
     </FrameLayout>
 
