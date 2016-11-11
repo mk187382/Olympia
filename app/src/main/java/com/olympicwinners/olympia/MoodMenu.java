@@ -1,6 +1,7 @@
 package com.olympicwinners.olympia;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class MoodMenu extends AppCompatActivity {
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
      */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+    private static final int AUTO_HIDE_DELAY_MILLIS = 500;
 
     /**
      * Some older devices needs a small delay between UI widget updates
@@ -105,7 +106,12 @@ public class MoodMenu extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.button4).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.button4   ).setOnTouchListener(mDelayHideTouchListener);
+    }
+
+    public void openImage(View view){
+        Intent intent = new Intent(this, SingleTestImage.class);
+        startActivity(intent);
     }
 
     @Override

@@ -3,4 +3,6 @@
 
     <string name="dummy_button">Take a break</string>
     <string name="dummy_content">Olympia</string>
+
+    <string name="title_activity_single_test_image">SingleTestImage</string>
 </resources>

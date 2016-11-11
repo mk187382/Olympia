@@ -68,7 +68,8 @@
                 android:textSize="22sp"
                 android:fontFamily="casual"
                 android:textAlignment="center"
-                android:backgroundTint="@color/black_overlay" />
+                android:backgroundTint="@color/black_overlay"
+                android:onClick="openImage"/>
 
             <Button
                 android:text="Load previous mandala"
