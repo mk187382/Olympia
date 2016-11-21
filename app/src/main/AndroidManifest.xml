@@ -9,6 +9,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MoodChoice"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="MoodChoice"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MoodMenu"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
@@ -19,11 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SingleTestImage"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_single_test_image"
-            android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".SketchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
