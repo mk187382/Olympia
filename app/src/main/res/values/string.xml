@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Olympia</string>
+
+    <string name="dummy_button">Take a break</string>
+    <string name="dummy_content">Olympia</string>
+
+
+    <!--mood_choice strings-->
+    <string name='your_feelings_now'>What is your mood today?</string>
+    <string name='angry'>Angry</string>
+    <string name='sad'>Sad</string>
+    <string name='melancholy'>Melancholic</string>
+    <string name='joy'>Joyful</string>
+    <string name='euphoria'>Euphoric</string>
+    <string name='calm'>Calmness</string>
+    <string name='excited'>Excited</string>
+    <string name='impatient'>Impatient</string>
+    <!--====     end     ====-->
+    <string name="appbar_scrolling_view_behavior">dong</string>
+    <string name="title_activity_single_test_image">SingleTestImage</string>
+    <string name="title_activity_sketch">SketchActivity</string>
+</resources>
