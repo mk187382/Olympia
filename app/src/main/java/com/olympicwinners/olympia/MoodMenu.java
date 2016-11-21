@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
+import static android.R.attr.value;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -110,8 +112,8 @@ public class MoodMenu extends AppCompatActivity {
     }
 
     public void openImage(View view){
-        Intent intent = new Intent(this, SingleTestImage.class);
-        startActivity(intent);
+        Intent myIntent = new Intent(MoodMenu.this, SketchActivity.class);
+        MoodMenu.this.startActivity(myIntent);
     }
 
     @Override

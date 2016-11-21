@@ -62,7 +62,7 @@
                 android:fontFamily="casual"
                 android:textAlignment="center"
                 android:backgroundTint="@color/black_overlay"
-                android:onClick="openImage" />
+                android:onClick="openImage (MoodMenu)" />
 
             <Button
                 android:text="Load previous mandala"

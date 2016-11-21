@@ -15,8 +15,8 @@
     <color name='calm'>#B3E5FC</color>
     <color name='excited'>#E6EE9C</color>
     <color name='impatient'>#FFE082</color>
-    
-        <!--fonts-->
+
+    <!--fonts-->
     <color name='angryFont'>#B71C1C</color>
     <color name='sadFont'>#4A148C</color>
     <color name='melancholyFont'>#311B92</color>

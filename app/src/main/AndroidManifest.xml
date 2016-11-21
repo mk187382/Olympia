@@ -26,8 +26,9 @@
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".SketchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_sketch"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>
