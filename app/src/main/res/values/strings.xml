@@ -19,5 +19,6 @@
     <string name="appbar_scrolling_view_behavior">dong</string>
     <string name="title_activity_single_test_image">SingleTestImage</string>
     <string name="title_activity_sketch">SketchActivity</string>
+    <string name="title_activity_moodchoice">MoodChoice</string>
 
 </resources>

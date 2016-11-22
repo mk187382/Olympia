@@ -75,8 +75,8 @@
                 android:textSize="22sp"
                 android:fontFamily="casual"
                 android:textAlignment="center"
-                android:elevation="0dp" />
-
+                android:elevation="0dp"
+                android:onClick="openImage" />
             <Button
                 android:text="Change your mood"
                 style="?metaButtonBarButtonStyle"
@@ -86,7 +86,8 @@
                 android:textColor="@android:color/holo_blue_dark"
                 android:textStyle="normal|bold"
                 android:textSize="22sp"
-                android:fontFamily="casual" />
+                android:fontFamily="casual"
+                android:onClick="openMoodMenu" />
 
             <Button
                 android:id="@+id/button4"
@@ -97,7 +98,8 @@
                 android:textColor="@android:color/holo_blue_dark"
                 android:textStyle="normal|bold"
                 android:textSize="22sp"
-                android:fontFamily="casual" />
+                android:fontFamily="casual"
+                android:onClick="openAbout"/>
         </LinearLayout>
 
         <ImageView

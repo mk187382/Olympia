@@ -54,7 +54,8 @@
                 android:textColor="@color/joyFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/joy"/>
+                android:background="@color/joy"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
@@ -75,7 +76,8 @@
                 android:textColor="@color/euphoriaFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/euphoria"/>
+                android:background="@color/euphoria"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
@@ -97,7 +99,8 @@
                 android:textColor="@color/impatientFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/impatient"/>
+                android:background="@color/impatient"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
@@ -119,7 +122,8 @@
                 android:textColor="@color/calmFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/calm"/>
+                android:background="@color/calm"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
@@ -140,7 +144,8 @@
                 android:textColor="@color/excitedFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/excited"/>
+                android:background="@color/excited"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
@@ -160,7 +165,8 @@
                 android:textColor="@color/angryFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/angry"/>
+                android:background="@color/angry"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
@@ -181,7 +187,8 @@
                 android:textColor="@color/sadFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/sad"/>
+                android:background="@color/sad"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
@@ -202,7 +209,8 @@
                 android:textColor="@color/melancholyFont"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:background="@color/melancholy"/>
+                android:background="@color/melancholy"
+                android:onClick="startMenu"/>
 
         </TableRow>
 
