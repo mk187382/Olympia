@@ -13,10 +13,4 @@
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_mandala_1"
-        android:id="@+id/imageView2"
-        android:background="?android:attr/colorBackgroundFloating" />
 </FrameLayout>

@@ -21,4 +21,14 @@
     <string name="title_activity_sketch">SketchActivity</string>
     <string name="title_activity_moodchoice">MoodChoice</string>
 
+    <string name="start_new">New</string>
+    <string name="brush">Brush</string>
+    <string name="erase">Erase</string>
+    <string name="save">Save</string>
+    <string name="paint">Paint</string>
+    <string name="pattern">pattern</string>
+    <string name="sml">Small</string>
+    <string name="med">Medium</string>
+    <string name="lrg">Large</string>
+
 </resources>

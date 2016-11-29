@@ -158,7 +158,7 @@ public class MoodMenu extends AppCompatActivity {
     }
 
     public void openImage(View view){
-        Intent myIntent = new Intent(MoodMenu.this, SketchActivity.class);
+        Intent myIntent = new Intent(MoodMenu.this, DrawingBoardActivity.class);
         MoodMenu.this.startActivity(myIntent);
         mServ.resumeMusic();
     }
