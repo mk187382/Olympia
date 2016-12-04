@@ -1,9 +1,17 @@
 package com.olympicwinners.olympia;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,18 +23,31 @@ import java.util.UUID;
 public class DrawingBoardActivity extends AppCompatActivity implements View.OnClickListener {
     private DrawingView mDrawView;
     private ImageButton mIvCurrPaint;
+    private boolean mIsBound = false;
+    private MusicService mServ;
+    private static final int REQUEST_EXTERNAL_STORAGE_RESULT = 1;
+
     private float mSmallBrush, mMediumBrush, mLargeBrush;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing_board);
-        //get brush sizes from resources
+
+        doBindService();
+        MusicService mServ = new MusicService();
+        Intent music = new Intent();
+        music.setClass(this, MusicService.class);
+        startService(music);
+
+        //mServ.resumeMusic();
         mSmallBrush = getResources().getInteger(R.integer.small_size);
         mMediumBrush = getResources().getInteger(R.integer.medium_size);
         mLargeBrush = getResources().getInteger(R.integer.large_size);
-        //get drawing view's instance
+
         mDrawView = (DrawingView) findViewById(R.id.drawing);
-        //set current color view as selected
+
         LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
         if (paintLayout != null) {
             mIvCurrPaint = (ImageButton) paintLayout.getChildAt(0);
@@ -34,7 +55,6 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                 mIvCurrPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
             }
         }
-        //set click listeners on new drawing button
         ImageButton btnNew = (ImageButton) findViewById(R.id.btn_new);
         if (btnNew != null) {
             btnNew.setOnClickListener(this);
@@ -49,84 +69,118 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         }
         ImageButton btnSave = (ImageButton) findViewById(R.id.btn_save);
         if (btnSave != null) {
+
             btnSave.setOnClickListener(this);
         }
         ImageButton btnFill = (ImageButton) findViewById(R.id.btn_fill);
         if (btnFill != null) {
             btnFill.setOnClickListener(this);
         }
-        //set initial brush size
         mDrawView.setBrushSize(mMediumBrush);
     }
-    //use chosen color
-    public void paintClicked(View view) {
-        //set erase as false (if set previously as true)
-        mDrawView.setErase(false);
-        //reset brush size (if some other option was selected previously)
-        mDrawView.setBrushSize(mDrawView.getLastBrushSize());
-        //update color
-        if (view != mIvCurrPaint) {
-            //get the clicked image button
-            ImageButton ivColorPallet = (ImageButton) view;
-            //get color from tag
-            String color = view.getTag().toString();
-            //set new brush color
-            mDrawView.setColor(color);
-            //set current button's background as pressed button
-            ivColorPallet.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-            //set previous button's background as unpressed button
-            mIvCurrPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-            //set current view as this button view
-            mIvCurrPaint = (ImageButton) view;
+
+    private ServiceConnection Scon = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder binder) {
+            mServ = ((MusicService.ServiceBinder) binder).getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mServ = null;
+        }
+    };
+
+    void doBindService() {
+        bindService(new Intent(this, MusicService.class),
+                Scon, MoodMenu.BIND_AUTO_CREATE);
+        mIsBound = true;
+    }
+
+    void doUnbindService() {
+        if (mIsBound) {
+            unbindService(Scon);
+            mIsBound = false;
         }
     }
-    //use chosen patten
-    public void patternClicked(View view) {
-        //set erase as false (if set previously as true)
+
+    public void paintClicked(View view) {
+
         mDrawView.setErase(false);
-        //reset brush size (if some other option was selected previously)
+
         mDrawView.setBrushSize(mDrawView.getLastBrushSize());
-        //update pattern
+
         if (view != mIvCurrPaint) {
-            //get the clicked image button
-            ImageButton ivPatten = (ImageButton) view;
-            //set patten to brush
-            mDrawView.setPattern(view.getTag().toString());
-            //set current button's background as pressed button
-            ivPatten.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-            //set previous button's background as unpressed button
+            ImageButton ivColorPallet = (ImageButton) view;
+            String color = view.getTag().toString();
+            mDrawView.setColor(color);
+            ivColorPallet.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
             mIvCurrPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-            //set current view as this button view
             mIvCurrPaint = (ImageButton) view;
         }
     }
     @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(requestCode == REQUEST_EXTERNAL_STORAGE_RESULT) {
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                saveDrawing();
+            } else {
+                Toast.makeText(this,
+                        "External write permission has not been granted, cannot saved images",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_new:
-                //new button
                 setNewCanvas();
                 break;
             case R.id.btn_draw:
-                //draw button clicked
                 setBrushSize();
                 break;
             case R.id.btn_erase:
-                //switch to erase - choose size
                 switchToEraseMode();
                 break;
             case R.id.btn_save:
-                //save drawing
-                saveDrawing();
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        saveDrawing();
+                    } else {
+                        if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            Toast.makeText(this,
+                                    "External storage permission required to save images",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                REQUEST_EXTERNAL_STORAGE_RESULT);
+                    }
+                } else {
+                    saveDrawing();
+                }
                 break;
+
             case R.id.btn_fill:
-                //fill button
                 mDrawView.fillColor();
                 break;
             default:
                 break;
         }
     }
+
+    public void onPause() {
+        super.onPause();
+        mServ.pauseMusic();
+        doUnbindService();
+    }
+
+
     private void setNewCanvas() {
         AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
         newDialog.setTitle("New drawing");
@@ -180,6 +234,8 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         });
         brushDialog.show();
     }
+
+
     private void switchToEraseMode() {
         final Dialog brushDialog = new Dialog(this);
         brushDialog.setTitle("Eraser size:");
@@ -213,14 +269,14 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         });
         brushDialog.show();
     }
-    //save drawing to gallery
+
+
     private void saveDrawing() {
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
         saveDialog.setTitle("Save drawing");
         saveDialog.setMessage("Save drawing to device Gallery?");
         saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //save drawing
                 mDrawView.setDrawingCacheEnabled(true);
                 String imgSaved = MediaStore.Images.Media.insertImage(
                         getContentResolver(), mDrawView.getDrawingCache(),
@@ -231,7 +287,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                     savedToast.show();
                 } else {
                     Toast unsavedToast = Toast.makeText(getApplicationContext(),
-                            "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
+                            "Image could not be saved.", Toast.LENGTH_SHORT);
                     unsavedToast.show();
                 }
                 mDrawView.destroyDrawingCache();
@@ -243,5 +299,6 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
             }
         });
         saveDialog.show();
+
     }
 }
