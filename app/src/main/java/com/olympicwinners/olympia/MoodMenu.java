@@ -27,6 +27,7 @@ public class MoodMenu extends AppCompatActivity {
     private View mContentView;
 
 
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override

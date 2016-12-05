@@ -2,94 +2,166 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="6168c91b77a8ce1e5b279223f5510bfc7baf78e9">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_04867b55c5f1dab715c3155d1a552d9f9d5f6dc5\classes.dex" />
+        sha1="c51e7ae664204db66b7ae795e4b3a77f3aaed55f">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_d8d04c1e8c2a99c595ce802eb16f6cfd2e3abbcf.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_baa28e4cf92545fd28ccc711ce01deea14257d07.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_5d1eb3d9cdd576174f42239efa081e1f6a29f032\classes.dex" />
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_02f870b30a226ea1d386feb65e9658afe394042f.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
         optimize="true"
         revision="23.0.3"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_ece47549af197a8c3850e0aaf45ce5a61dbd57cf\classes.dex" />
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_02f870b30a226ea1d386feb65e9658afe394042f.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.4.0_f3fa6a7d831a4781838f1db29a718ac0a5c0b9c5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_b77455c961357d224ced57cdd8f99600a0d3cb3e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="8c3ed0fd74083b471e6c857d560e20aca9e0dffc">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_12561db04eb540529ff070806f8248c9d03e23fd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\SDK\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_7f8ca6150cd0b1dc448d4be419cc72c3973e446f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_da4602f78eb19a84cbce7a4b6fba01b4cd896535\classes.dex" />
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_f2623d2394c59439743fa7f86c8d8a6d2cbdaef4.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_f2623d2394c59439743fa7f86c8d8a6d2cbdaef4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c4cfcc65977eb0ccd3396734dfb209790898143e">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\instant-run_acb8dcba41f6ae17ec9e87fefe485656e2c11e74.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_8761941e599befb475beb56de7ee21c2f588598f\classes.dex" />
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_1d0cb590e530787107eb920fb6e1997f9e5f5302.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\AndroidStudioProjects\Olympia\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_1d0cb590e530787107eb920fb6e1997f9e5f5302.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_2f2699918670dc35d347d5e3ab53230ec67b904a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.4.0_de733a62c7622f8df745c1e4b24e215e3497795c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_2f2699918670dc35d347d5e3ab53230ec67b904a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_7e52d57195f99dec423853074240030013c9383f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="C:\AndroidStudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_f54026ba584ec3e38337c9d90473d9f9161882a4\classes.dex" />
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_5fd635a80726e2349a23e1047051335e9d3896bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_baa28e4cf92545fd28ccc711ce01deea14257d07.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_7e52d57195f99dec423853074240030013c9383f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_5fd635a80726e2349a23e1047051335e9d3896bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="D:\projekt_kompetencyjny\Olympia\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.4.0_de733a62c7622f8df745c1e4b24e215e3497795c.jar" />
     </item>
 
 </items>

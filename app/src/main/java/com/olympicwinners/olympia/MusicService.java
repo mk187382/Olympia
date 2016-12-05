@@ -12,13 +12,27 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.widget.Toast;
 
-public class MusicService extends Service  implements MediaPlayer.OnErrorListener {
+import java.io.InputStream;
+
+public class MusicService extends Service  implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
 
     private final IBinder mBinder = new ServiceBinder();
     MediaPlayer mPlayer;
+    Songs songs;
+    //current position
     private int length = 0;
 
     public MusicService() {
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mediaPlayer) {
+
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mediaPlayer) {
+
     }
 
     public class ServiceBinder extends Binder {
@@ -35,8 +49,7 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
     @Override
     public void onCreate() {
         super.onCreate();
-
-        mPlayer = MediaPlayer.create(this, R.raw.sognodivolare);
+        mPlayer = MediaPlayer.create(this,R.raw.joyfull1);
         mPlayer.setOnErrorListener(this);
 
         if (mPlayer != null) {
@@ -58,6 +71,17 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        songs = Songs.getInstance();
+        String stream = songs.getFiles();
+        int resID;
+        if(stream ==null ) {
+            mPlayer = MediaPlayer.create(this, R.raw.joyfull1);
+        }
+        else {
+            resID=getResources().getIdentifier(stream, "raw", getPackageName());
+            mPlayer = MediaPlayer.create(this, resID);
+        }
+        mPlayer.setOnErrorListener(this);
         mPlayer.start();
         return START_STICKY;
     }
