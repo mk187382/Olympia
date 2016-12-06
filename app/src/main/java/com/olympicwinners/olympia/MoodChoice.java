@@ -12,27 +12,13 @@ import android.widget.Button;
 
 import java.util.Random;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+
 public class MoodChoice extends AppCompatActivity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
+
     private static final boolean AUTO_HIDE = true;
 
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
     private static final int AUTO_HIDE_DELAY_MILLIS = 500;
 
-    /**
-     * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
-     */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     Songs SONGS ;
@@ -67,11 +53,7 @@ public class MoodChoice extends AppCompatActivity {
             hide();
         }
     };
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
+
     private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -106,24 +88,13 @@ public class MoodChoice extends AppCompatActivity {
         melancholicButton.setOnClickListener(myOnlyhandler);
 
         mVisible = true;
-        //mControlsView = findViewById(R.id.fullscreen_content_controls);
-        //mContentView = findViewById(R.id.fullscreen_content);
 
-
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-       // findViewById(R.id.button4   ).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
         delayedHide(100);
     }
 
@@ -137,6 +108,7 @@ public class MoodChoice extends AppCompatActivity {
 
     View.OnClickListener myOnlyhandler = new View.OnClickListener() {
         public void onClick(View v) {
+            Intent myIntent = new Intent(MoodChoice.this, MoodMenu.class);
             Random r = new Random();
             int i1 = r.nextInt(2);
             switch(v.getId()) {
@@ -147,6 +119,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.joyfull2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.euphoriaBtn:
                     if(i1 == 1) {
@@ -155,6 +128,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.euphoric2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.impatientBtn:
                     if(i1 == 1) {
@@ -163,6 +137,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.impatient2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.calmBtn:
                     if(i1 == 1) {
@@ -171,6 +146,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.calmness2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.excitedBtn:
                     if(i1 == 1) {
@@ -179,6 +155,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.excited2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.angryBtn:
                     if(i1 == 1) {
@@ -187,6 +164,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.angry2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.sadBtn:
                     if(i1 == 1) {
@@ -195,6 +173,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.sad2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.melancholicBtn:
                     if(i1 == 1) {
@@ -203,6 +182,7 @@ public class MoodChoice extends AppCompatActivity {
                     else {
                         SONGS.addFile(getResources().getResourceName(R.raw.melanholic2));
                     }
+                    MoodChoice.this.startActivity(myIntent);
                     break;
             }
         }
