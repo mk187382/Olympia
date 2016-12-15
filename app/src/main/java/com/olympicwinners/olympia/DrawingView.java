@@ -28,6 +28,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 
 public class DrawingView extends View {
@@ -40,7 +41,14 @@ public class DrawingView extends View {
     private Bitmap mutableBmp;
     private float mBrushSize, mLastBrushSize;
     private boolean isFilling = false;
-    int resourceId = R.raw.mandala2;
+    int resourceIDs[] = {
+            R.raw.quick1,
+            R.raw.quick2,
+            R.raw.quick3,
+            R.raw.quick4,
+            R.raw.quick5,
+            R.raw.quick6
+    };
     Bitmap bmp;
 
     public DrawingView(Context context, AttributeSet attrs) {
@@ -68,11 +76,12 @@ public class DrawingView extends View {
 
         int widthOfNewBitmap, heightOfNewBitmap;
 
-        widthOfNewBitmap = this.getWidth();//width of this view
-        heightOfNewBitmap = this.getHeight();//height of this view
+        widthOfNewBitmap = this.getWidth();
+        heightOfNewBitmap = this.getHeight();
 
+        Random rB = new Random();
         super.onSizeChanged(w, h, oldw, oldh);
-        naturalmutableBmp = BitmapFactory.decodeResource(getResources(), resourceId);
+        naturalmutableBmp = BitmapFactory.decodeResource(getResources(), resourceIDs[rB.nextInt(5)]);
         Bitmap mutableBmp = Bitmap.createScaledBitmap(naturalmutableBmp, widthOfNewBitmap,heightOfNewBitmap,true);
         bmp = convertToMutable(mutableBmp);
         mDrawCanvas = new Canvas(bmp);
@@ -80,7 +89,6 @@ public class DrawingView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //bmp = BitmapFactory.decodeResource(getResources(), resourceId);
         canvas.drawBitmap(bmp, 0, 0, mCanvasPaint);
         canvas.drawPath(mDrawPath, mDrawPaint);
     }
@@ -110,7 +118,6 @@ public class DrawingView extends View {
             channel.close();
             randomAccessFile.close();
 
-            // delete the temp file
             file.delete();
 
         } catch (FileNotFoundException e) {
