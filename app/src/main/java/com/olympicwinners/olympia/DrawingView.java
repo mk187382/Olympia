@@ -78,9 +78,12 @@ public class DrawingView extends View {
 
         widthOfNewBitmap = this.getWidth();
         heightOfNewBitmap = this.getHeight();
-
-        Random rB = new Random();
         super.onSizeChanged(w, h, oldw, oldh);
+        newBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap);
+    }
+
+    private void newBitmapOnCanvas(int widthOfNewBitmap, int heightOfNewBitmap) {
+        Random rB = new Random();
         naturalmutableBmp = BitmapFactory.decodeResource(getResources(), resourceIDs[rB.nextInt(5)]);
         Bitmap mutableBmp = Bitmap.createScaledBitmap(naturalmutableBmp, widthOfNewBitmap,heightOfNewBitmap,true);
         bmp = convertToMutable(mutableBmp);
@@ -188,8 +191,9 @@ public class DrawingView extends View {
         }
     }
 
-    public void startNew() {
-        mDrawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+    public void startNew(int widthOfNewBitmap,int heightOfNewBitmap) {
+        //mDrawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        newBitmapOnCanvas(widthOfNewBitmap,heightOfNewBitmap);
         invalidate();
     }
 
