@@ -1,0 +1,50 @@
+{
+  "joy": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=33&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ],
+  "euphoria": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=34&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ],
+  "impatient": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=35&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ],
+  "calm": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=36&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ],
+  "excited": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=39&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ],
+  "angry": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=40&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ],
+  "sad": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=44&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ],
+  "melancholic": [
+    {
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=45&Search=Search",
+      "items": "/music/royalty-free/mp3-royaltyfree/"
+    }
+  ]
+}
