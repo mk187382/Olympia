@@ -1,50 +1,42 @@
 {
   "joy": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=33&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=33&Search=Search"
     }
   ],
   "euphoria": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=34&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=34&Search=Search"
     }
   ],
   "impatient": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=35&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=35&Search=Search"
     }
   ],
   "calm": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=36&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=36&Search=Search"
     }
   ],
   "excited": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=39&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=39&Search=Search"
     }
   ],
   "angry": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=40&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=40&Search=Search"
     }
   ],
   "sad": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=44&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=44&Search=Search"
     }
   ],
   "melancholic": [
     {
-      "id": "https://incompetech.com/music/royalty-free/index.html?collection=45&Search=Search",
-      "items": "/music/royalty-free/mp3-royaltyfree/"
+      "id": "https://incompetech.com/music/royalty-free/index.html?collection=45&Search=Search"
     }
   ]
 }

@@ -32,6 +32,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -40,6 +42,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.data;
 import static android.R.attr.value;
 
 public class MoodMenu extends AppCompatActivity {
@@ -118,8 +121,6 @@ public class MoodMenu extends AppCompatActivity {
             }
         });
         findViewById(R.id.button4).setOnTouchListener(mDelayHideTouchListener);
-
-                (new ParseURL()).execute(new String[]{siteUrl});
         
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -225,36 +226,5 @@ public class MoodMenu extends AppCompatActivity {
     }
 
 
-    private class ParseURL extends AsyncTask<String, Void, String> {
 
-        @Override
-        protected String doInBackground(String... strings) {
-            StringBuffer buffer = new StringBuffer();
-            try {
-
-
-            } catch (Throwable t) {
-                t.printStackTrace();
-            }
-
-            return buffer.toString();
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-    }
-    public ArrayList getJSON(String v){
-        final JSONObject jsonObject = new JSONObject(json);
-        final JSONArray a = (JSONArray) jsonObject.get("a");
-        final List<String> returnArray = new ArrayList<>();
-
-        for (int i = 0; i < a.length(); i++) {
-            returnArray.add((String)a.get(i));
-        }
-
-        return returnArray;
-    }
 }

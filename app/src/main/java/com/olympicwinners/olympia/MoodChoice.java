@@ -10,6 +10,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 /**
@@ -86,7 +92,13 @@ public class MoodChoice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SONGS = Songs.getInstance();
         setContentView(R.layout.activity_mood_choice);
+        JSONObject obj;
 
+        try {
+            obj = new JSONObject(loadJSONFromAsset());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         joyButton = (Button) findViewById(R.id.joyBtn);
         euphoriaButton = (Button) findViewById(R.id.euphoriaBtn);
         impatientButton = (Button) findViewById(R.id.impatientBtn);
@@ -226,5 +238,42 @@ public class MoodChoice extends AppCompatActivity {
     public void startMenu(View view) {
         Intent intent = new Intent(MoodChoice.this, MoodMenu.class);
         MoodChoice.this.startActivity(intent);
+    }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        InputStream inputStream = getResources().openRawResource(R.raw.urlstream);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        int ctr;
+        try {
+            ctr = inputStream.read();
+            while (ctr != -1) {
+                byteArrayOutputStream.write(ctr);
+                ctr = inputStream.read();
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+
+            int size = inputStream.available();
+
+            byte[] buffer = new byte[size];
+
+            inputStream.read(buffer);
+
+            inputStream.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+
     }
 }
