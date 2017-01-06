@@ -5,19 +5,29 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
-    android:orientation="vertical"
-    tools:context="com.olympicwinners.olympia.DrawingBoardActivity">
+    tools:context="com.olympicwinners.olympia.DrawingBoardActivity"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/btn_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/start_new"
             app:srcCompat="@drawable/ic_new_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/btn_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/start_new"
+            app:srcCompat="@drawable/ic_new_black_24dp" />
+
         <ImageButton
             android:id="@+id/btn_draw"
             android:layout_width="wrap_content"
@@ -43,6 +53,7 @@
             android:contentDescription="@string/save"
             app:srcCompat="@drawable/ic_format_color_fill_black_24dp" />
     </LinearLayout>
+
     <com.olympicwinners.olympia.DrawingView
         android:id="@+id/drawing"
         android:layout_width="match_parent"
@@ -59,7 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
         <ImageButton
             android:layout_width="@dimen/large_brush"
             android:layout_height="@dimen/large_brush"
@@ -113,7 +125,8 @@
             android:contentDescription="@string/paint"
             android:onClick="paintClicked"
             android:src="@drawable/paint"
-            android:tag="#FF009999" />
+            android:tag="#FF009999"
+            android:layout_weight="0.83" />
 
     </LinearLayout>
     <!-- Bottom Row -->

@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -16,10 +18,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
 import java.util.UUID;
+
+import static com.olympicwinners.olympia.R.id.image;
+import static com.olympicwinners.olympia.R.id.imageView;
 
 public class DrawingBoardActivity extends AppCompatActivity implements View.OnClickListener {
     private DrawingView mDrawView;
@@ -27,8 +34,9 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
     private boolean mIsBound = false;
     private MusicService mServ;
     private static final int REQUEST_EXTERNAL_STORAGE_RESULT = 1;
-
+    private static final int PICK_IMAGE = 100;
     private float mSmallBrush, mMediumBrush, mLargeBrush;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +69,16 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         if (btnDraw != null) {
             btnDraw.setOnClickListener(this);
         }
+        ImageButton btnLoad = (ImageButton) findViewById(R.id.btn_load);
+        if (btnLoad != null) {
+            btnLoad.setOnClickListener(this);
+        }
         ImageButton btnErase = (ImageButton) findViewById(R.id.btn_erase);
         if (btnErase != null) {
             btnErase.setOnClickListener(this);
         }
         ImageButton btnSave = (ImageButton) findViewById(R.id.btn_save);
         if (btnSave != null) {
-
             btnSave.setOnClickListener(this);
         }
         ImageButton btnFill = (ImageButton) findViewById(R.id.btn_fill);
@@ -133,6 +144,28 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    private void loadImageFromGallery() {
+        Intent gallery =
+                new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final int widthOfNewBitmap = mDrawView.getWidth();
+        final int heightOfNewBitmap = mDrawView.getHeight();
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            Uri imageUri = data.getData();
+            //imageView.setImageURI(imageUri);
+            try {
+                mDrawView.openBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap,imageUri,this);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -144,6 +177,9 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.btn_erase:
                 switchToEraseMode();
+                break;
+            case R.id.btn_load:
+                loadImageFromGallery();
                 break;
             case R.id.btn_save:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -162,6 +198,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     saveDrawing();
                 }
+
                 break;
 
             case R.id.btn_fill:
@@ -239,6 +276,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         });
         brushDialog.show();
     }
+
     private void switchToEraseMode() {
         final Dialog brushDialog = new Dialog(this);
         brushDialog.setTitle("Eraser size:");

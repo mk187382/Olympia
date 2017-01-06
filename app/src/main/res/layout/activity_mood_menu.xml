@@ -48,35 +48,23 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical|center_horizontal"
             android:layout_gravity="center_vertical"
-            android:paddingTop="90sp">
+            android:paddingTop="90sp"
+            android:weightSum="1">
 
             <Button
                 android:text="Take it easy"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="43dp"
+                android:layout_height="57dp"
                 android:id="@+id/button3"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textStyle="normal|bold"
-                android:textSize="22sp"
+                android:textSize="36sp"
                 android:fontFamily="casual"
                 android:textAlignment="center"
                 android:backgroundTint="@color/black_overlay"
                 android:onClick="openImage" />
 
-            <Button
-                android:text="Load previous mandala"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:id="@+id/button2"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textStyle="normal|bold"
-                android:textSize="22sp"
-                android:fontFamily="casual"
-                android:textAlignment="center"
-                android:elevation="0dp"
-                android:onClick="openImage" />
             <Button
                 android:text="Change your mood"
                 style="?metaButtonBarButtonStyle"

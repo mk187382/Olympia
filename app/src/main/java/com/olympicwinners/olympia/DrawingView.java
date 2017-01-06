@@ -14,6 +14,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -24,6 +25,7 @@ import android.view.View;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -92,6 +94,15 @@ public class DrawingView extends View {
         mDrawCanvas = new Canvas(bmp);
     }
 
+    public void openBitmapOnCanvas(int widthOfNewBitmap, int heightOfNewBitmap,Uri uri,Context context) throws FileNotFoundException {
+        InputStream inputStream = context.getContentResolver().openInputStream(uri);
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        naturalmutableBmp = BitmapFactory.decodeStream(inputStream, null, options);
+        Bitmap mutableBmp = Bitmap.createScaledBitmap(naturalmutableBmp, widthOfNewBitmap, heightOfNewBitmap, true);
+        bmp = convertToMutable(mutableBmp);
+        mDrawCanvas = new Canvas(bmp);
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
