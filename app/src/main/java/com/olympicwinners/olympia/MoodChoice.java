@@ -21,7 +21,7 @@ public class MoodChoice extends AppCompatActivity {
 
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    Songs SONGS ;
+    Songs SONGS;
     Button joyButton;
     Button euphoriaButton;
     Button impatientButton;
@@ -39,7 +39,6 @@ public class MoodChoice extends AppCompatActivity {
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
         public void run() {
-            // Delayed display of UI elements
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.show();
@@ -111,75 +110,67 @@ public class MoodChoice extends AppCompatActivity {
             Intent myIntent = new Intent(MoodChoice.this, MoodMenu.class);
             Random r = new Random();
             int i1 = r.nextInt(2);
-            switch(v.getId()) {
+            switch (v.getId()) {
                 case R.id.joyBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.joyfull1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.joyfull2));
                     }
                     MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.euphoriaBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.euphoric1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.euphoric2));
                     }
                     MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.impatientBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.impatient1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.impatient2));
                     }
                     MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.calmBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.calmness1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.calmness2));
                     }
                     MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.excitedBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.excited1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.excited2));
                     }
                     MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.angryBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.angry1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.angry2));
                     }
                     MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.sadBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.sad1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.sad2));
                     }
                     MoodChoice.this.startActivity(myIntent);
                     break;
                 case R.id.melancholicBtn:
-                    if(i1 == 1) {
+                    if (i1 == 1) {
                         SONGS.addFile(getResources().getResourceName(R.raw.melanholic1));
-                    }
-                    else {
+                    } else {
                         SONGS.addFile(getResources().getResourceName(R.raw.melanholic2));
                     }
                     MoodChoice.this.startActivity(myIntent);
@@ -189,24 +180,20 @@ public class MoodChoice extends AppCompatActivity {
     };
 
     private void hide() {
-        // Hide UI first
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
         mVisible = false;
 
-        // Schedule a runnable to remove the status and navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
 
     @SuppressLint("InlinedApi")
     private void show() {
-        // Show the system bar
         mVisible = true;
 
-        // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }

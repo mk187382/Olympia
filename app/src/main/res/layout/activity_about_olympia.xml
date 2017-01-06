@@ -11,7 +11,7 @@
     tools:context="com.olympicwinners.olympia.AboutOlympia">
 
     <TextView
-        android:text="Najlepsza apka pod dachem"
+        android:text="Olympia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

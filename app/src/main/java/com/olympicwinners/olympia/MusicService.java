@@ -14,12 +14,11 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 
-public class MusicService extends Service  implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
+public class MusicService extends Service implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
 
     private final IBinder mBinder = new ServiceBinder();
     MediaPlayer mPlayer;
     Songs songs;
-    //current position
     private int length = 0;
 
     public MusicService() {
@@ -49,7 +48,7 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
     @Override
     public void onCreate() {
         super.onCreate();
-        mPlayer = MediaPlayer.create(this,R.raw.joyfull1);
+        mPlayer = MediaPlayer.create(this, R.raw.joyfull1);
         mPlayer.setOnErrorListener(this);
 
         if (mPlayer != null) {
@@ -74,11 +73,10 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
         songs = Songs.getInstance();
         String stream = songs.getFiles();
         int resID;
-        if(stream ==null ) {
+        if (stream == null) {
             mPlayer = MediaPlayer.create(this, R.raw.joyfull1);
-        }
-        else {
-            resID=getResources().getIdentifier(stream, "raw", getPackageName());
+        } else {
+            resID = getResources().getIdentifier(stream, "raw", getPackageName());
             mPlayer = MediaPlayer.create(this, resID);
         }
         mPlayer.setOnErrorListener(this);
@@ -103,7 +101,7 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
     public void stopMusic() {
         mPlayer.stop();
         mPlayer.release();
-        mPlayer = null;
+        //mPlayer = null;
     }
 
     @Override

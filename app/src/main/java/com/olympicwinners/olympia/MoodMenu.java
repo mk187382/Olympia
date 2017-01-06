@@ -27,7 +27,6 @@ public class MoodMenu extends AppCompatActivity {
     private View mContentView;
 
 
-
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -86,17 +85,17 @@ public class MoodMenu extends AppCompatActivity {
                 toggle();
             }
         });
-        findViewById(R.id.button4   ).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.button4).setOnTouchListener(mDelayHideTouchListener);
     }
 
 
-    public void openImage(View view){
+    public void openImage(View view) {
         Intent myIntent = new Intent(MoodMenu.this, DrawingBoardActivity.class);
         MoodMenu.this.startActivity(myIntent);
 
     }
 
-    public void openMoodMenu(View view){
+    public void openMoodMenu(View view) {
         Intent myIntent = new Intent(MoodMenu.this, MoodChoice.class);
         MoodMenu.this.startActivity(myIntent);
 
@@ -121,9 +120,6 @@ public class MoodMenu extends AppCompatActivity {
             show();
         }
     }
-
-
-
 
     private void hide() {
 

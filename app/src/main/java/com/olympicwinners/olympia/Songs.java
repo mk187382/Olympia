@@ -14,7 +14,7 @@ public class Songs {
 
     }
 
-    public static synchronized  Songs getInstance() {
+    public static synchronized Songs getInstance() {
         if (instance == null) {
             instance = new Songs();
         }
@@ -23,7 +23,7 @@ public class Songs {
     }
 
     public void addFile(String f) {
-        fileCollection =f;
+        fileCollection = f;
     }
 
     public String getFiles() {

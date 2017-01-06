@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import java.util.UUID;
 
 public class DrawingBoardActivity extends AppCompatActivity implements View.OnClickListener {
@@ -29,19 +30,16 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
 
     private float mSmallBrush, mMediumBrush, mLargeBrush;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing_board);
-
         doBindService();
         MusicService mServ = new MusicService();
         Intent music = new Intent();
         music.setClass(this, MusicService.class);
         startService(music);
 
-        //mServ.resumeMusic();
         mSmallBrush = getResources().getInteger(R.integer.small_size);
         mMediumBrush = getResources().getInteger(R.integer.medium_size);
         mLargeBrush = getResources().getInteger(R.integer.large_size);
@@ -108,7 +106,6 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
     public void paintClicked(View view) {
 
         mDrawView.setErase(false);
-
         mDrawView.setBrushSize(mDrawView.getLastBrushSize());
 
         if (view != mIvCurrPaint) {
@@ -120,10 +117,11 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
             mIvCurrPaint = (ImageButton) view;
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if(requestCode == REQUEST_EXTERNAL_STORAGE_RESULT) {
-            if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_EXTERNAL_STORAGE_RESULT) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 saveDrawing();
             } else {
                 Toast.makeText(this,
@@ -148,7 +146,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                 switchToEraseMode();
                 break;
             case R.id.btn_save:
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         saveDrawing();
@@ -179,7 +177,11 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         mServ.pauseMusic();
         doUnbindService();
     }
-
+    /*@Override
+    public void onResume() {
+        super.onResume();
+        mServ.resumeMusic();
+    }*/
 
     private void setNewCanvas() {
         final int widthOfNewBitmap = mDrawView.getWidth();
@@ -189,7 +191,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
         newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                mDrawView.startNew(widthOfNewBitmap,heightOfNewBitmap);
+                mDrawView.startNew(widthOfNewBitmap, heightOfNewBitmap);
                 dialog.dismiss();
             }
         });
@@ -200,6 +202,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         });
         newDialog.show();
     }
+
     private void setBrushSize() {
         final Dialog brushDialog = new Dialog(this);
         brushDialog.setTitle("Brush size:");
@@ -236,8 +239,6 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         });
         brushDialog.show();
     }
-
-
     private void switchToEraseMode() {
         final Dialog brushDialog = new Dialog(this);
         brushDialog.setTitle("Eraser size:");
@@ -272,7 +273,6 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         brushDialog.show();
     }
 
-
     private void saveDrawing() {
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
         saveDialog.setTitle("Save drawing");
@@ -301,6 +301,5 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
             }
         });
         saveDialog.show();
-
     }
 }

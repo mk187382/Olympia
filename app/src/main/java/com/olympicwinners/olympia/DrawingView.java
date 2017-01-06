@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 
 import java.io.File;
@@ -41,6 +42,8 @@ public class DrawingView extends View {
     private Bitmap mutableBmp;
     private float mBrushSize, mLastBrushSize;
     private boolean isFilling = false;
+    private ScaleGestureDetector mScaleDetector;
+    private float mScaleFactor = 1.f;
     int resourceIDs[] = {
             R.raw.quick1,
             R.raw.quick2,
@@ -54,6 +57,7 @@ public class DrawingView extends View {
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setupDrawing();
+        mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
     }
 
     private void setupDrawing() {
@@ -72,8 +76,6 @@ public class DrawingView extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-//kuniec
-
         int widthOfNewBitmap, heightOfNewBitmap;
 
         widthOfNewBitmap = this.getWidth();
@@ -85,15 +87,20 @@ public class DrawingView extends View {
     private void newBitmapOnCanvas(int widthOfNewBitmap, int heightOfNewBitmap) {
         Random rB = new Random();
         naturalmutableBmp = BitmapFactory.decodeResource(getResources(), resourceIDs[rB.nextInt(5)]);
-        Bitmap mutableBmp = Bitmap.createScaledBitmap(naturalmutableBmp, widthOfNewBitmap,heightOfNewBitmap,true);
+        Bitmap mutableBmp = Bitmap.createScaledBitmap(naturalmutableBmp, widthOfNewBitmap, heightOfNewBitmap, true);
         bmp = convertToMutable(mutableBmp);
         mDrawCanvas = new Canvas(bmp);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        canvas.save();
+        canvas.scale(mScaleFactor, mScaleFactor);
         canvas.drawBitmap(bmp, 0, 0, mCanvasPaint);
         canvas.drawPath(mDrawPath, mDrawPaint);
+        canvas.restore();
     }
 
     public static Bitmap convertToMutable(Bitmap imgIn) {
@@ -107,7 +114,7 @@ public class DrawingView extends View {
             Bitmap.Config type = imgIn.getConfig();
 
             FileChannel channel = randomAccessFile.getChannel();
-            MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, imgIn.getRowBytes()*height);
+            MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, imgIn.getRowBytes() * height);
             imgIn.copyPixelsToBuffer(map);
             imgIn.recycle();
             System.gc();
@@ -130,6 +137,19 @@ public class DrawingView extends View {
         }
 
         return imgIn;
+    }
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+            mScaleFactor *= detector.getScaleFactor();
+
+            // Don't let the object get too small or too large.
+            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+
+            invalidate();
+            return true;
+        }
     }
 
     @Override
@@ -161,6 +181,7 @@ public class DrawingView extends View {
             }
         }
         invalidate();
+        mScaleDetector.onTouchEvent(event);
         return true;
     }
 
@@ -176,9 +197,11 @@ public class DrawingView extends View {
                 newSize, getResources().getDisplayMetrics());
         mDrawPaint.setStrokeWidth(mBrushSize);
     }
+
     public void setLastBrushSize(float lastSize) {
         mLastBrushSize = lastSize;
     }
+
     public float getLastBrushSize() {
         return mLastBrushSize;
     }
@@ -191,9 +214,8 @@ public class DrawingView extends View {
         }
     }
 
-    public void startNew(int widthOfNewBitmap,int heightOfNewBitmap) {
-        //mDrawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        newBitmapOnCanvas(widthOfNewBitmap,heightOfNewBitmap);
+    public void startNew(int widthOfNewBitmap, int heightOfNewBitmap) {
+        newBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap);
         invalidate();
     }
 
@@ -201,6 +223,7 @@ public class DrawingView extends View {
     public void fillColor() {
         isFilling = true;
     }
+
     private synchronized void FloodFill(Point startPoint) {
         Queue<Point> queue = new LinkedList<>();
         queue.add(startPoint);
@@ -210,12 +233,16 @@ public class DrawingView extends View {
             if (bmp.getPixel(nextPoint.x, nextPoint.y) != targetColor)
                 continue;
             Point point = new Point(nextPoint.x + 1, nextPoint.y);
-            while ((nextPoint.x > 0) && (bmp.getPixel(nextPoint.x, nextPoint.y) == targetColor)) {bmp.setPixel(nextPoint.x, nextPoint.y, mPaintColor);
-                if ((nextPoint.y > 0) && (bmp.getPixel(nextPoint.x, nextPoint.y - 1) == targetColor)) queue.add(new Point(nextPoint.x, nextPoint.y - 1));
-                if ((nextPoint.y < bmp.getHeight() - 1) && (bmp.getPixel(nextPoint.x, nextPoint.y + 1) == targetColor)) queue.add(new Point(nextPoint.x, nextPoint.y + 1));
+            while ((nextPoint.x > 0) && (bmp.getPixel(nextPoint.x, nextPoint.y) == targetColor)) {
+                bmp.setPixel(nextPoint.x, nextPoint.y, mPaintColor);
+                if ((nextPoint.y > 0) && (bmp.getPixel(nextPoint.x, nextPoint.y - 1) == targetColor))
+                    queue.add(new Point(nextPoint.x, nextPoint.y - 1));
+                if ((nextPoint.y < bmp.getHeight() - 1) && (bmp.getPixel(nextPoint.x, nextPoint.y + 1) == targetColor))
+                    queue.add(new Point(nextPoint.x, nextPoint.y + 1));
                 nextPoint.x--;
             }
-            while ((point.x < bmp.getWidth() - 1) && (bmp.getPixel(point.x, point.y) == targetColor)) {bmp.setPixel(point.x, point.y, mPaintColor);
+            while ((point.x < bmp.getWidth() - 1) && (bmp.getPixel(point.x, point.y) == targetColor)) {
+                bmp.setPixel(point.x, point.y, mPaintColor);
                 if ((point.y > 0) && (bmp.getPixel(point.x, point.y - 1) == targetColor))
                     queue.add(new Point(point.x, point.y - 1));
                 if ((point.y < bmp.getHeight() - 1)
