@@ -98,6 +98,7 @@ public class DrawingView extends View {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         naturalmutableBmp = BitmapFactory.decodeStream(inputStream, null, options);
         Bitmap mutableBmp = Bitmap.createScaledBitmap(naturalmutableBmp, widthOfNewBitmap, heightOfNewBitmap, true);
         bmp = convertToMutable(mutableBmp);
