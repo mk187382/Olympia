@@ -96,10 +96,6 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         if (btnSave != null) {
             btnSave.setOnClickListener(this);
         }
-        ImageButton btnFill = (ImageButton) findViewById(R.id.btn_fill);
-        if (btnFill != null) {
-            btnFill.setOnClickListener(this);
-        }
         mDrawView.setBrushSize(mMediumBrush);
     }
 

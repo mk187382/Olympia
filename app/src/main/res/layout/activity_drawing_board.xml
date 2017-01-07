@@ -15,12 +15,6 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <ToggleButton
-            android:text="fillToggleButton"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:id="@+id/fillToggleButton" />
-
         <ImageButton
             android:id="@+id/btn_new"
             android:layout_width="wrap_content"
@@ -36,29 +30,36 @@
             app:srcCompat="@drawable/ic_noun_576648_cc" />
 
         <ImageButton
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/save"
+            app:srcCompat="@drawable/ic_save_black_24dp" />
+
+        <Space
+            android:layout_width="11dp"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
             android:id="@+id/btn_draw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/brush"
             app:srcCompat="@drawable/ic_brush_black_24dp" />
+
+        <ToggleButton
+            android:text="fillToggleButton"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/fillToggleButton" />
+
         <ImageButton
             android:id="@+id/btn_erase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/erase"
             app:srcCompat="@drawable/ic_eraser_black_24dp" />
-        <ImageButton
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/save"
-            app:srcCompat="@drawable/ic_save_black_24dp" />
-        <ImageButton
-            android:id="@+id/btn_fill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/save"
-            app:srcCompat="@drawable/ic_format_color_fill_black_24dp" />
+
     </LinearLayout>
 
     <com.olympicwinners.olympia.DrawingView
