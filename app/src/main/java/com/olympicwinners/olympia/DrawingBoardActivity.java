@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.olympicwinners.olympia.R.id.image;
 import static com.olympicwinners.olympia.R.id.imageView;
@@ -150,16 +152,28 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
+    public static Uri handleImageUri(Uri uri) {
+        if (uri.getPath().contains("content")) {
+            Pattern pattern = Pattern.compile("(content://media/.*\\d)");
+            Matcher matcher = pattern.matcher(uri.getPath());
+            if (matcher.find())
+                return Uri.parse(matcher.group(1));
+            else
+                throw new IllegalArgumentException("Cannot handle this URI");
+        }
+        return uri;
+    }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         final int widthOfNewBitmap = mDrawView.getWidth();
         final int heightOfNewBitmap = mDrawView.getHeight();
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             Uri imageUri = data.getData();
+            Uri workingUri = handleImageUri(imageUri);
             //imageView.setImageURI(imageUri);
             try {
-                mDrawView.openBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap,imageUri,this);
+                mDrawView.openBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap,workingUri,this);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

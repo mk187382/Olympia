@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="7a26525a0e7339de797c204b3948a2275a356c03">
+        sha1="b2d1871c2c28418ea0439dd0589d9a0ca48cf1fd">
         <dex dex="C:\Users\Maciej\StudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_3b5639cf18d049520a9663a098ece92fb88f3539\classes.dex" />
     </item>
     <item
@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="cf1b570b6cf81271da7c937dae0538c19d7df940">
+        sha1="7dd54633a566ce6aa4cd681fa5d31715bac252dd">
         <dex dex="C:\Users\Maciej\StudioProjects\Olympia\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_d4d720b6c60fa5b6423bfa5975ef06e184759ddf\classes.dex" />
     </item>
     <item
