@@ -10,7 +10,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
         <service android:name="com.olympicwinners.olympia.MusicService"
             android:enabled="true"/>
@@ -39,7 +40,9 @@
             android:name=".DrawingBoardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter">
         </activity>
         <activity android:name=".AboutOlympia"></activity>
     </application>

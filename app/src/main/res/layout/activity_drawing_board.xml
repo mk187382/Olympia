@@ -6,7 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     tools:context="com.olympicwinners.olympia.DrawingBoardActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:adjustViewBounds="true"
+    android:scaleType="fitCenter">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -62,17 +64,27 @@
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
     <com.olympicwinners.olympia.DrawingView
         android:id="@+id/drawing"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="3dp"
-        android:layout_weight="1"
-        android:background="#FFFFFFFF" />
+        android:layout_weight="0.63"
+        android:background="#FFFFFFFF"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"/>
     <!-- Top Row -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
     <LinearLayout
         android:id="@+id/paint_colors"
         android:layout_width="wrap_content"
