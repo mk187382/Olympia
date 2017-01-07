@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <ImageButton
             android:id="@+id/btn_new"
@@ -26,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/start_new"
-            app:srcCompat="@drawable/ic_new_black_24dp" />
+            app:srcCompat="@drawable/ic_noun_576648_cc" />
 
         <ImageButton
             android:id="@+id/btn_draw"
