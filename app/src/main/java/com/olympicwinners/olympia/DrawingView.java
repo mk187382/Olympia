@@ -213,6 +213,9 @@ public class DrawingView extends View {
         isFilling = true;
     }
 
+    public void disableFillColor(){
+        isFilling = false;
+    }
     private synchronized void FloodFill(Point startPoint) {
         Queue<Point> queue = new LinkedList<>();
         queue.add(startPoint);
@@ -240,7 +243,6 @@ public class DrawingView extends View {
                 point.x++;
             }
         }
-        isFilling = false;
     }
 
 

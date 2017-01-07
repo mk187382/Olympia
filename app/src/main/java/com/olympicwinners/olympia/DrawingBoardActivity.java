@@ -65,6 +65,17 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                 mIvCurrPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
             }
         }
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.fillToggleButton);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                  if (isChecked) {
+                                                      mDrawView.fillColor();
+                                                  } else {
+                                                      mDrawView.disableFillColor();
+                                                  }
+                                              }
+                                          }
+        );
         ImageButton btnNew = (ImageButton) findViewById(R.id.btn_new);
         if (btnNew != null) {
             btnNew.setOnClickListener(this);
@@ -185,17 +196,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        ToggleButton toggle = (ToggleButton) findViewById(R.id.fillToggleButton);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                  if (isChecked) {
-                                                      mDrawView.fillColor();
-                                                  } else {
-                                                      //NIC
-                                                  }
-                                              }
-                                          }
-        );
+
 
         switch (view.getId()) {
             case R.id.btn_new:
