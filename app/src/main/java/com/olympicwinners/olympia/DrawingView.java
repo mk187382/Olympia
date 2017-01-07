@@ -44,8 +44,7 @@ public class DrawingView extends View {
     private Bitmap mutableBmp;
     private float mBrushSize, mLastBrushSize;
     private boolean isFilling = false;
-    private ScaleGestureDetector mScaleDetector;
-    private float mScaleFactor = 1.f;
+
     int resourceIDs[] = {
             R.raw.quick1,
             R.raw.quick2,
@@ -59,7 +58,6 @@ public class DrawingView extends View {
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setupDrawing();
-        mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
     }
 
     private void setupDrawing() {
@@ -104,13 +102,8 @@ public class DrawingView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        canvas.save();
-        canvas.scale(mScaleFactor, mScaleFactor);
         canvas.drawBitmap(bmp, 0, 0, mCanvasPaint);
         canvas.drawPath(mDrawPath, mDrawPaint);
-        canvas.restore();
     }
 
     public static Bitmap convertToMutable(Bitmap imgIn) {
@@ -149,19 +142,6 @@ public class DrawingView extends View {
         return imgIn;
     }
 
-    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        @Override
-        public boolean onScale(ScaleGestureDetector detector) {
-            mScaleFactor *= detector.getScaleFactor();
-
-            // Don't let the object get too small or too large.
-            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
-
-            invalidate();
-            return true;
-        }
-    }
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
@@ -191,7 +171,6 @@ public class DrawingView extends View {
             }
         }
         invalidate();
-        mScaleDetector.onTouchEvent(event);
         return true;
     }
 

@@ -17,10 +17,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.io.FileNotFoundException;
 import java.util.UUID;
@@ -163,6 +165,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         }
         return uri;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         final int widthOfNewBitmap = mDrawView.getWidth();
@@ -173,7 +176,7 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
             Uri workingUri = handleImageUri(imageUri);
             //imageView.setImageURI(imageUri);
             try {
-                mDrawView.openBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap,workingUri,this);
+                mDrawView.openBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap, workingUri, this);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -182,6 +185,18 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.fillToggleButton);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                  if (isChecked) {
+                                                      mDrawView.fillColor();
+                                                  } else {
+                                                      //NIC
+                                                  }
+                                              }
+                                          }
+        );
+
         switch (view.getId()) {
             case R.id.btn_new:
                 setNewCanvas();
@@ -214,14 +229,14 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                 }
 
                 break;
-
-            case R.id.btn_fill:
+            /*case R.id.btn_fill:
                 mDrawView.fillColor();
-                break;
+                break;*/
             default:
                 break;
         }
     }
+
 
     public void onPause() {
         super.onPause();
