@@ -2,18 +2,18 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
 
     <color name="black_overlay">#66000000</color>
 
     <!--moods-->
     <color name='angry'>#EF9A9A</color>
-    <color name='sad'>#CE93D8</color>
+    <color name='sad'>#ddbae3</color>
     <color name='melancholy'>#B39DDB</color>
     <color name='joy'>#FFF59D</color>
     <color name='euphoria'>#FFE0B2</color>
     <color name='calm'>#B3E5FC</color>
-    <color name='excited'>#E6EE9C</color>
+    <color name='excited'>#e8eeae</color>
     <color name='impatient'>#FFE082</color>
 
     <!--fonts-->
@@ -21,7 +21,7 @@
     <color name='sadFont'>#4A148C</color>
     <color name='melancholyFont'>#311B92</color>
     <color name='joyFont'>#F57F17</color>
-    <color name='euphoriaFont'>#E65100</color>
+    <color name='euphoriaFont'>#e65100</color>
     <color name='calmFont'>#01579B</color>
     <color name='excitedFont'>#827717</color>
     <color name='impatientFont'>#FF6F00</color>
