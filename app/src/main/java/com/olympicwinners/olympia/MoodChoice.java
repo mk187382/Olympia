@@ -2,20 +2,32 @@ package com.olympicwinners.olympia;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -40,7 +52,9 @@ public class MoodChoice extends AppCompatActivity {
      * and a change of the status and navigation bar.
      */
     private static final int UI_ANIMATION_DELAY = 300;
+    private static final String TAG = "MoodChoice";
     private final Handler mHideHandler = new Handler();
+    ArrayList<String> Urls;
     Songs SONGS;
     Button joyButton;
     Button euphoriaButton;
@@ -59,6 +73,7 @@ public class MoodChoice extends AppCompatActivity {
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
         public void run() {
+            // Delayed display of UI elements
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.show();
@@ -86,6 +101,11 @@ public class MoodChoice extends AppCompatActivity {
             return false;
         }
     };
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +113,8 @@ public class MoodChoice extends AppCompatActivity {
         SONGS = Songs.getInstance();
         setContentView(R.layout.activity_mood_choice);
         JSONObject obj;
+        Urls = getUrls();
 
-        try {
-            obj = new JSONObject(loadJSONFromAsset());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         joyButton = (Button) findViewById(R.id.joyBtn);
         euphoriaButton = (Button) findViewById(R.id.euphoriaBtn);
         impatientButton = (Button) findViewById(R.id.impatientBtn);
@@ -116,16 +132,18 @@ public class MoodChoice extends AppCompatActivity {
         sadButton.setOnClickListener(myOnlyhandler);
         melancholicButton.setOnClickListener(myOnlyhandler);
 
-        mVisible = true;
+        //mVisible = true;
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
         //mContentView = findViewById(R.id.fullscreen_content);
-
 
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-       // findViewById(R.id.button4   ).setOnTouchListener(mDelayHideTouchListener);
+        // findViewById(R.id.button4   ).setOnTouchListener(mDelayHideTouchListener);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -152,80 +170,60 @@ public class MoodChoice extends AppCompatActivity {
             int i1 = r.nextInt(2);
             switch (v.getId()) {
                 case R.id.joyBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.joyfull1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.joyfull2));
-                    }
+                    Urls.get(0);
+                    Log.i(TAG, "Urls.get(0) — get item number " + Urls.get(0));
                     break;
                 case R.id.euphoriaBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.euphoric1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.euphoric2));
-                    }
+                    Urls.get(1);
+                    Log.i(TAG, "Urls.get(1) — get item number " + Urls.get(1));
                     break;
                 case R.id.impatientBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.impatient1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.impatient2));
-                    }
+                    Urls.get(2);
+                    Log.i(TAG, "Urls.get(2) — get item number " + Urls.get(2));
                     break;
                 case R.id.calmBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.calmness1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.calmness2));
-                    }
+                    Urls.get(3);
+                    Log.i(TAG, "Urls.get(3) — get item number " + Urls.get(3));
                     break;
                 case R.id.excitedBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.excited1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.excited2));
-                    }
+                    Urls.get(4);
+                    Log.i(TAG, "Urls.get(4) — get item number " + Urls.get(4));
                     break;
                 case R.id.angryBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.angry1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.angry2));
-                    }
+                    Urls.get(5);
+                    Log.i(TAG, "Urls.get(5) — get item number " + Urls.get(5));
                     break;
                 case R.id.sadBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.sad1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.sad2));
-                    }
+                    Urls.get(6);
+                    Log.i(TAG, "Urls.get(6) — get item number " + Urls.get(6));
                     break;
                 case R.id.melancholicBtn:
-                    if (i1 == 1) {
-                        SONGS.addFile(getResources().getResourceName(R.raw.melanholic1));
-                    } else {
-                        SONGS.addFile(getResources().getResourceName(R.raw.melanholic2));
-                    }
+                    Log.i(TAG, "Urls.get(7) — get item number " + Urls.get(7));
+                    Urls.get(7);
                     break;
             }
         }
     };
 
     private void hide() {
+        // Hide UI first
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
         mVisible = false;
 
+        // Schedule a runnable to remove the status and navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
 
     @SuppressLint("InlinedApi")
     private void show() {
+        // Show the system bar
         mVisible = true;
 
+        // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
@@ -240,11 +238,46 @@ public class MoodChoice extends AppCompatActivity {
         MoodChoice.this.startActivity(intent);
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("MoodChoice Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
+
+    public ArrayList<String> getUrls() {
         InputStream inputStream = getResources().openRawResource(R.raw.urlstream);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
+        ArrayList<String> data = new ArrayList<String>();
         int ctr;
         try {
             ctr = inputStream.read();
@@ -256,24 +289,27 @@ public class MoodChoice extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Log.v("Text Data", byteArrayOutputStream.toString());
         try {
-
-            int size = inputStream.available();
-
-            byte[] buffer = new byte[size];
-
-            inputStream.read(buffer);
-
-            inputStream.close();
-
-            json = new String(buffer, "UTF-8");
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+            // Parse the data into jsonobject to get original data in form of json.
+            JSONObject jObject = new JSONObject(
+                    byteArrayOutputStream.toString());
+            JSONObject jObjectResult = jObject.getJSONObject("Url");
+            String cat_Id = "";
+            String cat_name = "";
+            Iterator<String> iter = jObjectResult.keys();
+            while (iter.hasNext()) {
+                String key = iter.next();
+                try {
+                    data.add((String) jObjectResult.get(key));
+                } catch (JSONException e) {
+                    // Something went wrong!
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return json;
-
+        return data;
     }
+
 }

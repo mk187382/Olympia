@@ -31,6 +31,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 
 public class DrawingView extends View {
@@ -77,11 +78,15 @@ public class DrawingView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         int widthOfNewBitmap, heightOfNewBitmap;
 
-        widthOfNewBitmap = this.getWidth();//width of this view
-        heightOfNewBitmap = this.getHeight();//height of this view
-
+        widthOfNewBitmap = this.getWidth();
+        heightOfNewBitmap = this.getHeight();
         super.onSizeChanged(w, h, oldw, oldh);
-        naturalmutableBmp = BitmapFactory.decodeResource(getResources(), resourceId);
+        newBitmapOnCanvas(widthOfNewBitmap, heightOfNewBitmap);
+    }
+
+    private void newBitmapOnCanvas(int widthOfNewBitmap, int heightOfNewBitmap) {
+        Random rB = new Random();
+        naturalmutableBmp = BitmapFactory.decodeResource(getResources(), resourceIDs[rB.nextInt(5)]);
         Bitmap mutableBmp = Bitmap.createScaledBitmap(naturalmutableBmp, widthOfNewBitmap, heightOfNewBitmap, true);
         bmp = convertToMutable(mutableBmp);
         mDrawCanvas = new Canvas(bmp);
@@ -97,7 +102,6 @@ public class DrawingView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        //bmp = BitmapFactory.decodeResource(getResources(), resourceId);
         canvas.drawBitmap(bmp, 0, 0, mCanvasPaint);
         canvas.drawPath(mDrawPath, mDrawPaint);
     }
@@ -127,7 +131,6 @@ public class DrawingView extends View {
             channel.close();
             randomAccessFile.close();
 
-            // delete the temp file
             file.delete();
 
         } catch (FileNotFoundException e) {

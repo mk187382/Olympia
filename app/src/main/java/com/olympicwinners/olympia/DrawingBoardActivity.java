@@ -247,12 +247,14 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
     }*/
 
     private void setNewCanvas() {
+        final int widthOfNewBitmap = mDrawView.getWidth();
+        final int heightOfNewBitmap = mDrawView.getHeight();
         AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
         newDialog.setTitle("New drawing");
         newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
         newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                mDrawView.startNew();
+                mDrawView.startNew(widthOfNewBitmap, heightOfNewBitmap);
                 dialog.dismiss();
             }
         });
