@@ -6,12 +6,16 @@ package com.olympicwinners.olympia;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnErrorListener;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 public class MusicService extends Service implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
@@ -48,8 +52,9 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
     @Override
     public void onCreate() {
         super.onCreate();
-        mPlayer = MediaPlayer.create(this, R.raw.joyfull1);
+        mPlayer = new MediaPlayer();
         mPlayer.setOnErrorListener(this);
+        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         if (mPlayer != null) {
             mPlayer.setLooping(true);
@@ -71,13 +76,29 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         songs = Songs.getInstance();
-        String stream = songs.getFiles();
-        int resID;
-        if (stream == null) {
-            mPlayer = MediaPlayer.create(this, R.raw.joyfull1);
-        } else {
-            resID = getResources().getIdentifier(stream, "raw", getPackageName());
-            mPlayer = MediaPlayer.create(this, resID);
+        String stream = songs.getFiles().replaceAll(" ","%20");
+        Log.d("Stream","Stream="+stream);
+        Uri uri = Uri.parse(stream);
+        Log.d("Stream","Stream="+uri);
+        mPlayer = MediaPlayer.create(this, uri);
+        try {
+            mPlayer.setDataSource(stream);
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly1!", Toast.LENGTH_LONG).show();
+        } catch (SecurityException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly2!", Toast.LENGTH_LONG).show();
+        } catch (IllegalStateException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly3!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            mPlayer.prepare();
+        } catch (IllegalStateException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly4!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly5!", Toast.LENGTH_LONG).show();
         }
         mPlayer.setOnErrorListener(this);
         mPlayer.start();

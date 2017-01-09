@@ -134,7 +134,7 @@ public class MoodMenu extends AppCompatActivity {
     }
 
 
-    public void openMoodMenu(View view) {
+    public void openMoodChoice(View view) {
         Intent myIntent = new Intent(MoodMenu.this, MoodChoice.class);
         MoodMenu.this.startActivity(myIntent);
 

@@ -75,7 +75,7 @@
                 android:textStyle="normal|bold"
                 android:textSize="22sp"
                 android:fontFamily="casual"
-                android:onClick="openMoodMenu" />
+                android:onClick="openMoodChoice" />
 
             <Button
                 android:id="@+id/button4"

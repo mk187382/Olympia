@@ -4,6 +4,7 @@
     package="com.olympicwinners.olympia">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:configChanges="orientation|screenSize|keyboardHidden"
         android:allowBackup="true"
@@ -15,6 +16,7 @@
 
         <service android:name="com.olympicwinners.olympia.MusicService"
             android:enabled="true"/>
+
 
         <activity
             android:screenOrientation="portrait"

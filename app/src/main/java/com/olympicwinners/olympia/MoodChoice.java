@@ -3,6 +3,7 @@ package com.olympicwinners.olympia;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,11 +18,12 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -29,6 +31,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -54,8 +57,7 @@ public class MoodChoice extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private static final String TAG = "MoodChoice";
     private final Handler mHideHandler = new Handler();
-    ArrayList<String> Urls;
-    Songs SONGS;
+    ArrayList<String> urls;
     Button joyButton;
     Button euphoriaButton;
     Button impatientButton;
@@ -64,6 +66,9 @@ public class MoodChoice extends AppCompatActivity {
     Button angryButton;
     Button sadButton;
     Button melancholicButton;
+    MoodChoice moodChoice;
+    MoodChoice.ParseURL parseURL;
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -110,11 +115,9 @@ public class MoodChoice extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SONGS = Songs.getInstance();
         setContentView(R.layout.activity_mood_choice);
-        JSONObject obj;
-        Urls = getUrls();
-
+        urls = new ArrayList<String>();
+        urls.addAll(geturls());
         joyButton = (Button) findViewById(R.id.joyBtn);
         euphoriaButton = (Button) findViewById(R.id.euphoriaBtn);
         impatientButton = (Button) findViewById(R.id.impatientBtn);
@@ -164,44 +167,42 @@ public class MoodChoice extends AppCompatActivity {
         }
     }
 
+    public void openMoodMenu(View view) {
+        Intent myIntent = new Intent(MoodChoice.this,MoodMenu.class);
+        MoodChoice.this.startActivity(myIntent);
+
+    }
+
     View.OnClickListener myOnlyhandler = new View.OnClickListener() {
         public void onClick(View v) {
-            Random r = new Random();
-            int i1 = r.nextInt(2);
             switch (v.getId()) {
                 case R.id.joyBtn:
-                    Urls.get(0);
-                    Log.i(TAG, "Urls.get(0) — get item number " + Urls.get(0));
+
+                    randSong(urls.get(0));
                     break;
                 case R.id.euphoriaBtn:
-                    Urls.get(1);
-                    Log.i(TAG, "Urls.get(1) — get item number " + Urls.get(1));
+                    randSong(urls.get(1));
                     break;
                 case R.id.impatientBtn:
-                    Urls.get(2);
-                    Log.i(TAG, "Urls.get(2) — get item number " + Urls.get(2));
+                    randSong(urls.get(2));
                     break;
                 case R.id.calmBtn:
-                    Urls.get(3);
-                    Log.i(TAG, "Urls.get(3) — get item number " + Urls.get(3));
+                    randSong(urls.get(3));
                     break;
                 case R.id.excitedBtn:
-                    Urls.get(4);
-                    Log.i(TAG, "Urls.get(4) — get item number " + Urls.get(4));
+                    randSong(urls.get(4));
                     break;
                 case R.id.angryBtn:
-                    Urls.get(5);
-                    Log.i(TAG, "Urls.get(5) — get item number " + Urls.get(5));
+                    randSong(urls.get(5));
                     break;
                 case R.id.sadBtn:
-                    Urls.get(6);
-                    Log.i(TAG, "Urls.get(6) — get item number " + Urls.get(6));
+                    randSong(urls.get(6));
                     break;
                 case R.id.melancholicBtn:
-                    Log.i(TAG, "Urls.get(7) — get item number " + Urls.get(7));
-                    Urls.get(7);
+                    randSong(urls.get(7));
                     break;
             }
+
         }
     };
 
@@ -267,14 +268,14 @@ public class MoodChoice extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
 
-    public ArrayList<String> getUrls() {
+    public ArrayList<String> geturls() {
         InputStream inputStream = getResources().openRawResource(R.raw.urlstream);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ArrayList<String> data = new ArrayList<String>();
@@ -312,4 +313,73 @@ public class MoodChoice extends AppCompatActivity {
         return data;
     }
 
+    public class ParseURL extends AsyncTask<String, Void, ArrayList<String>> {
+        Random randomGenerator;
+        ArrayList<String> linksToSongs;
+        Songs SONGS;
+
+        @Override
+        protected ArrayList<String> doInBackground(String... strings) {
+            randomGenerator = new Random();
+            linksToSongs = new ArrayList<String>();
+            SONGS = Songs.getInstance();
+
+
+            StringBuilder buffer = new StringBuilder("");
+       //     buffer.append("http://incompetech.com/music/royalty-free/");
+            try {
+                //Log.d("JSwa", "Connecting to [" + strings[0] + "]");
+                Document doc = Jsoup.connect(strings[0]).get();
+                //Log.d("JSwa", "Connected to [" + strings[0] + "]");
+                // Get document (HTML page) title
+                String title = doc.title();
+                //Log.d("JSwA", "Title [" + title + "]");
+/*                buffer.append("Title: " + title + "rn");
+
+                // Get meta info
+                Elements metaElems = doc.select("meta");
+                buffer.append("META DATArn");
+                for (Element metaElem : metaElems) {
+                    String name = metaElem.attr("name");
+                    String content = metaElem.attr("content");
+                    buffer.append("name [" + name + "] - content [" + content + "] rn");
+                }*/
+
+                Elements topicList = doc.select("a[href$=.mp3]");
+                for (Element topic : topicList) {
+                    String data = topic.text();
+                    data = data.replace("Download ","");
+                    data = data.replace(" as mp3","");
+                    data = data.replaceAll("\"","");
+                    buffer.append("http://incompetech.com/music/royalty-free/mp3-royaltyfree/"+data+".mp3");
+                    linksToSongs.add(buffer.toString());
+                    buffer.setLength(0);
+                    //Log.d("JSwa", "parsed values [" + linksToSongs.toString() + "]");
+                }
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+            Log.d("JSwa", "parsed values ["+linksToSongs.toString()+"]");
+            SONGS.addFile(anyItem());
+            return linksToSongs;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> s) {
+            super.onPostExecute(s);
+
+        }
+
+        public String anyItem()
+        {
+            int index = randomGenerator.nextInt(linksToSongs.size());
+            String item = linksToSongs.get(index);
+            Log.d("JSwa", "Managers choice this week " + item + " our recommendation to you");
+            linksToSongs.clear();
+            return item;
+        }
+    }
+    void randSong(String s){
+        (new ParseURL() ).execute(s);
+    }
 }
