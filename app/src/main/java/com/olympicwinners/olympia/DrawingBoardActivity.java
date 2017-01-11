@@ -92,6 +92,10 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
         if (btnErase != null) {
             btnErase.setOnClickListener(this);
         }
+        ImageButton btnNext = (ImageButton) findViewById(R.id.btn_music);
+        if (btnNext != null) {
+            btnNext.setOnClickListener(this);
+        }
         ImageButton btnSave = (ImageButton) findViewById(R.id.btn_save);
         if (btnSave != null) {
             btnSave.setOnClickListener(this);
@@ -207,6 +211,9 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_load:
                 loadImageFromGallery();
                 break;
+            case R.id.btn_music:
+                mServ.playSong();
+                break;
             case R.id.btn_save:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ContextCompat.checkSelfPermission(this,
@@ -224,7 +231,6 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     saveDrawing();
                 }
-
                 break;
             /*case R.id.btn_fill:
                 mDrawView.fillColor();
@@ -232,8 +238,8 @@ public class DrawingBoardActivity extends AppCompatActivity implements View.OnCl
             default:
                 break;
         }
+        mServ.resumeMusic();
     }
-
 
     public void onPause() {
         super.onPause();

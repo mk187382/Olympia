@@ -7,26 +7,41 @@ import java.util.ArrayList;
  * Created by user on 2016-12-05.
  */
 public class Songs {
-    private String fileCollection;
+    private String file;
+    private ArrayList<String> fileColection;
     private static Songs instance;
+
+    public Songs(ArrayList<String> fileColection, String file) {
+        this.fileColection = fileColection;
+        this.file = file;
+    }
 
     private Songs() {
 
     }
 
-    public static synchronized Songs getInstance() {
+    static synchronized Songs getInstance() {
         if (instance == null) {
             instance = new Songs();
         }
-
         return instance;
     }
 
-    public void addFile(String f) {
-        fileCollection = f;
+    public String getFile() {
+        return file;
     }
 
-    public String getFiles() {
-        return fileCollection;
+    public void addFiles(ArrayList<String> s) {
+        fileColection = new ArrayList<>();
+        for(String track: s){
+            fileColection.add(track);
+        }
+    }
+    public ArrayList<String> getFiles() {
+        return fileColection;
+    }
+
+    public void clear(){
+        Songs.getInstance().fileColection.clear();
     }
 }

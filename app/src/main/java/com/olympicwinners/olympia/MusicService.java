@@ -17,13 +17,18 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class MusicService extends Service implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
 
     private final IBinder mBinder = new ServiceBinder();
     MediaPlayer mPlayer;
     Songs songs;
+    String stream;
+    ArrayList<String> songsList;
     private int length = 0;
+    private Random randomGenerator;
 
     public MusicService() {
     }
@@ -35,7 +40,7 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
-
+        mPlayer.start();
     }
 
     public class ServiceBinder extends Binder {
@@ -53,6 +58,8 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
     public void onCreate() {
         super.onCreate();
         mPlayer = new MediaPlayer();
+        songsList = new ArrayList<>();
+        randomGenerator = new Random();
         mPlayer.setOnErrorListener(this);
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
@@ -76,19 +83,24 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         songs = Songs.getInstance();
-        String stream = songs.getFiles().replaceAll(" ","%20");
-        Log.d("Stream","Stream="+stream);
+        if(songs.getFiles()==null){
+            stream ="http://incompetech.com/music/royalty-free/mp3-royaltyfree/Killers.mp3";
+        }else {
+            songsList.addAll(songs.getFiles());
+            stream = anyItem();
+        }
+        //Log.d("Stream","Stream="+stream);
         Uri uri = Uri.parse(stream);
         Log.d("Stream","Stream="+uri);
         mPlayer = MediaPlayer.create(this, uri);
         try {
             mPlayer.setDataSource(stream);
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly1!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "You might not set the URI correctly1!", Toast.LENGTH_LONG).show();
         } catch (SecurityException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly2!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "You might not set the URI correctly2!", Toast.LENGTH_LONG).show();
         } catch (IllegalStateException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly3!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "You might not set the URI correctly3!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,13 +108,46 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
         try {
             mPlayer.prepare();
         } catch (IllegalStateException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly4!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "You might not set the URI correctly4!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly5!", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
         mPlayer.setOnErrorListener(this);
         mPlayer.start();
         return START_STICKY;
+    }
+
+    public void  playSong(){
+        // Play song
+        try {
+            mPlayer.reset();
+            mPlayer.setDataSource(anyItem());
+            Log.d("Stream","Stream="+anyItem());
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> getSongsList() {
+        return songsList;
+    }
+
+    public void setSongsList(ArrayList<String> songsList) {
+        this.songsList = songsList;
+    }
+
+    public String getStream() {
+        return stream;
+    }
+
+    public void setStream(String stream) {
+        this.stream = stream;
     }
 
     public void pauseMusic() {
@@ -130,6 +175,7 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
         super.onDestroy();
         if (mPlayer != null) {
             try {
+                songsList.clear();
                 mPlayer.stop();
                 mPlayer.release();
             } finally {
@@ -143,6 +189,7 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
         Toast.makeText(this, "music player failed", Toast.LENGTH_SHORT).show();
         if (mPlayer != null) {
             try {
+                songsList.clear();
                 mPlayer.stop();
                 mPlayer.release();
             } finally {
@@ -150,5 +197,13 @@ public class MusicService extends Service implements MediaPlayer.OnErrorListener
             }
         }
         return false;
+    }
+
+    public String anyItem()
+    {
+        int index = randomGenerator.nextInt(songsList.size());
+        String item = songsList.get(index);
+        Log.d("JSwa", "Managers choice this week " + item + " our recommendation to you");
+        return item;
     }
 }

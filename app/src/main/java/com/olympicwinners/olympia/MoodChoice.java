@@ -177,7 +177,6 @@ public class MoodChoice extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.joyBtn:
-
                     randSong(urls.get(0));
                     break;
                 case R.id.euphoriaBtn:
@@ -202,7 +201,7 @@ public class MoodChoice extends AppCompatActivity {
                     randSong(urls.get(7));
                     break;
             }
-
+            finish();
         }
     };
 
@@ -314,36 +313,19 @@ public class MoodChoice extends AppCompatActivity {
     }
 
     public class ParseURL extends AsyncTask<String, Void, ArrayList<String>> {
-        Random randomGenerator;
         ArrayList<String> linksToSongs;
         Songs SONGS;
 
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
-            randomGenerator = new Random();
             linksToSongs = new ArrayList<String>();
             SONGS = Songs.getInstance();
-
 
             StringBuilder buffer = new StringBuilder("");
        //     buffer.append("http://incompetech.com/music/royalty-free/");
             try {
-                //Log.d("JSwa", "Connecting to [" + strings[0] + "]");
                 Document doc = Jsoup.connect(strings[0]).get();
-                //Log.d("JSwa", "Connected to [" + strings[0] + "]");
-                // Get document (HTML page) title
                 String title = doc.title();
-                //Log.d("JSwA", "Title [" + title + "]");
-/*                buffer.append("Title: " + title + "rn");
-
-                // Get meta info
-                Elements metaElems = doc.select("meta");
-                buffer.append("META DATArn");
-                for (Element metaElem : metaElems) {
-                    String name = metaElem.attr("name");
-                    String content = metaElem.attr("content");
-                    buffer.append("name [" + name + "] - content [" + content + "] rn");
-                }*/
 
                 Elements topicList = doc.select("a[href$=.mp3]");
                 for (Element topic : topicList) {
@@ -352,7 +334,7 @@ public class MoodChoice extends AppCompatActivity {
                     data = data.replace(" as mp3","");
                     data = data.replaceAll("\"","");
                     buffer.append("http://incompetech.com/music/royalty-free/mp3-royaltyfree/"+data+".mp3");
-                    linksToSongs.add(buffer.toString());
+                    linksToSongs.add(buffer.toString().replaceAll(" ", "%20"));
                     buffer.setLength(0);
                     //Log.d("JSwa", "parsed values [" + linksToSongs.toString() + "]");
                 }
@@ -360,7 +342,7 @@ public class MoodChoice extends AppCompatActivity {
                 t.printStackTrace();
             }
             Log.d("JSwa", "parsed values ["+linksToSongs.toString()+"]");
-            SONGS.addFile(anyItem());
+            SONGS.addFiles(linksToSongs);
             return linksToSongs;
         }
 
@@ -370,14 +352,7 @@ public class MoodChoice extends AppCompatActivity {
 
         }
 
-        public String anyItem()
-        {
-            int index = randomGenerator.nextInt(linksToSongs.size());
-            String item = linksToSongs.get(index);
-            Log.d("JSwa", "Managers choice this week " + item + " our recommendation to you");
-            linksToSongs.clear();
-            return item;
-        }
+
     }
     void randSong(String s){
         (new ParseURL() ).execute(s);

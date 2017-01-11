@@ -38,9 +38,12 @@
             android:contentDescription="@string/save"
             app:srcCompat="@drawable/ic_save_black_24dp" />
 
-        <Space
-            android:layout_width="11dp"
-            android:layout_height="wrap_content" />
+        <ImageButton
+            android:id="@+id/btn_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Play"
+            app:srcCompat="@drawable/ic_music_note" />
 
         <ImageButton
             android:id="@+id/btn_draw"
