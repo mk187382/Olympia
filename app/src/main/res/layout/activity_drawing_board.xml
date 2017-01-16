@@ -54,9 +54,12 @@
 
         <ToggleButton
             android:text="fillToggleButton"
-            android:layout_width="50dp"
+            android:layout_width="56dp"
             android:layout_height="match_parent"
-            android:id="@+id/fillToggleButton" />
+            android:id="@+id/fillToggleButton"
+            android:textOn="Fill On"
+            android:textOff="Fill Off"
+            android:textSize="11sp" />
 
         <ImageButton
             android:id="@+id/btn_erase"
