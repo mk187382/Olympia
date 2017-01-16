@@ -11,10 +11,12 @@
     tools:context="com.olympicwinners.olympia.AboutOlympia">
 
     <TextView
-        android:text="Olympia"
+        android:text="Olympia has been created by Maciej Magda and Katarzyna"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:textSize="36sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
 </RelativeLayout>
